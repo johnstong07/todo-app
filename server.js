@@ -8,6 +8,8 @@ dotenv.config();
 // Initialize express
 const app = express();
 const port = 3000;
+// Add near top of server.js
+app.use(express.static('client'));
 
 // Middleware
 app.use(express.json());
@@ -26,4 +28,12 @@ app.get('/', (req, res) => {
 // Start server
 app.listen(port, () => {
     console.log(`Server running at http://localhost:${port}`);
+});
+
+process.on("SIGINT", () => {
+  console.log("Stopping server...");
+  server.close(() => {
+    console.log("Server stopped. Port released.");
+    process.exit(0);
+  });
 });
