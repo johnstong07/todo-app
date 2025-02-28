@@ -32,19 +32,17 @@ async function fetchTodos() {
     
     // Handle form submission
     todoForm.addEventListener('submit', async (e) => {
-    // add your code  
     e.preventDefault(); // Prevent the default form submission behavior
-    const newTodo = todoInput.value.trim(); // Get the value from the input field
+    const newTodo = todoInput.value.trim(); // Get the value from the input field and remove any unneccessary speach using .trim
   
     if (newTodo) {
-      // Here you would usually send the newTodo to your backend
-      // For the sake of this example, we'll just log it
+      // Display the todos added into the console
       console.log("New Todo:", newTodo);
       
-      // Optionally, clear the input
+      // Clear the recent input 
       todoInput.value = '';
       
-      // Add the new todo to the display (this part could be handled with a real backend saving)
+      // Add the new todo to the display page
       const li = document.createElement('li');
       li.textContent = newTodo;
       todoList.appendChild(li);
