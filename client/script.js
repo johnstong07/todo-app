@@ -28,10 +28,29 @@ async function fetchTodos() {
     todos.forEach(todo => {
       const li = document.createElement('li'); // Create a new list item
       li.textContent = todo.title; // Set the text content to the todo title
+
+      // Create a delete button
+      const deleteButton = document.createElement('button'); 
+      deleteButton.textContent = 'Delete'; 
+
+      // Add click event listener to delete the todo
+      deleteButton.onclick = () => {
+        deleteTodo(todo.id); // You need the ID to delete correctly
+    };
+
+    li.appendChild(deleteButton); // Append the delete button to the list item
+
       todoList.appendChild(li); // Append the list item to the todo list
     });
     }
     
+   // Function to handle deleting a todo
+function deleteTodo(id) {
+  // For now, we will just log the ID of the todo to be deleted
+  console.log(`Todo with ID ${id} is to be deleted`);
+}
+
+  
     // Handle form submission
     todoForm.addEventListener('submit', async (e) => {
     e.preventDefault(); // Prevent the default form submission behavior
@@ -47,6 +66,20 @@ async function fetchTodos() {
       // Add the new todo to the display page
       const li = document.createElement('li');
       li.textContent = newTodo;
+
+      // Create a delete button
+      const deleteButton = document.createElement('button');
+      deleteButton.textContent = 'Delete';
+
+     // Add click event listener to the button
+     deleteButton.onclick = () => {
+     //console.log the delete action
+     console.log("Deleting:", newTodo);
+     li.remove(); // Just remove the todo from the DOM for now
+};
+
+li.appendChild(deleteButton); // Append the delete button to the list item
+
       todoList.appendChild(li);
     } else {
       alert("Please enter a todo.");
