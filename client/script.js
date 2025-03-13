@@ -1,5 +1,3 @@
-
-
 // Get DOM HTML Elements
 const todoForm = document.getElementById('todoForm'); // Assuming you have a form with this ID
 const todoInput = document.getElementById('todoInput'); // Assuming you have an input field with this ID
@@ -12,7 +10,7 @@ async function fetchTodos() {
         //Await the fetched input
         const response = await fetch(''); // Sample API
         //The input response
-        const todos = await response.json();
+        const todos = await response.json()
         //Display the todos in the console
         displayTodos(todos);
         //Error displayed when todos are unable to be fetched
@@ -37,7 +35,6 @@ async function fetchTodos() {
       deleteButton.onclick = () => {
         deleteTodo(todo.id); // You need the ID to delete correctly
     };
-
     li.appendChild(deleteButton); // Append the delete button to the list item
 
       todoList.appendChild(li); // Append the list item to the todo list
@@ -55,11 +52,14 @@ function deleteTodo(id) {
     todoForm.addEventListener('submit', async (e) => {
     e.preventDefault(); // Prevent the default form submission behavior
     const newTodo = todoInput.value.trim(); // Get the value from the input field and remove any unneccessary speach using .trim
-  
+    const todoId = todoInput.dataset.todoId; // Get the stored todo ID if it exists
+
+
     if (newTodo) {
       // Display the todos added into the console
       console.log("New Todo:", newTodo);
-      
+
+
       // Clear the recent input 
       todoInput.value = '';
       
@@ -74,7 +74,7 @@ function deleteTodo(id) {
      // Add click event listener to the button
      deleteButton.onclick = () => {
      //console.log the delete action
-     console.log("Deleting:", newTodo);
+     console.log("Deleted:", newTodo);
      li.remove(); // Just remove the todo from the DOM for now
 };
 
