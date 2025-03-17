@@ -37,3 +37,16 @@ process.on("SIGINT", () => {
     process.exit(0);
   });
 });
+
+// Route to delete a todo by ID
+app.delete('/todos/:id', async (req, res) => {
+    const { id } = req.params;
+
+    try {
+        const todo = await Todo.findByIdAndDelete(id);
+        if (!todo) return res.status(404).json({ message: 'Todo not found' });
+        res.json({ message: 'Todo deleted' });
+    } catch (error) {
+        res.status(500).json({ message: 'Failed to delete todo' });
+    }
+});

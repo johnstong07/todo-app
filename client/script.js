@@ -8,7 +8,7 @@ async function fetchTodos() {
     // add your code
     try {
         //Await the fetched input
-        const response = await fetch(''); // Sample API
+        const response = await fetch('/api/todos'); // Sample API
         //The input response
         const todos = await response.json()
         //Display the todos in the console
@@ -58,6 +58,21 @@ async function fetchTodos() {
          li.appendChild(deleteButton); // Re-append the delete button
          inputField.remove(); // Remove the input field from the DOM
          saveButton.remove(); // Remove the save button from the DOM
+
+         try {
+          //Await the fetched input
+          const response = await fetch('/api/todos'); // Sample API
+          //The input response
+          const todos = await response.json()
+          //Display the todos in the console
+          // Retrieve todos from localStorage or create an empty array if none exists
+      
+          displayTodos(todos);
+          //Error displayed when todos are unable to be fetched
+        } catch (error) {
+          console.error("Error fetching todos:", error);
+        }
+
      } else {
          alert("Please enter a valid title."); // Alert if the input is empty
      }
@@ -101,6 +116,11 @@ function deleteTodo(id) {
       // Display the todos added into the console
       console.log("New Todo:", newTodo);
 
+      const response = await fetch("https://example.org/post", {
+        method: "POST",
+        body: JSON.stringify({ title: newTodo }),
+        // ...
+      });
 
       // Clear the recent input 
       todoInput.value = '';
